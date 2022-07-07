@@ -107,12 +107,12 @@ sub execute {
         return $retval;
     }
     
-    my $dir = $this->collect()->basesubdirs()->{$cd};
+    my $dir = $this->collect()->basesubdirs()->{1};
         $this->logMsg("I",
             "BASE CD <$dir>"
         );
     
-    system("find $cd");
+    system("find $dir");
     return $retval;
 }
 

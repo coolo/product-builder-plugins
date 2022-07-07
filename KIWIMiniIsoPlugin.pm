@@ -95,7 +95,6 @@ sub execute {
     if($this->{m_ready} == 0) {
         return $retval;
     }
-    my $repoloc = $this->collect()->productData()->getOpt("REPO_LOCATION");
     my $ismini = $this->collect()->productData()->getVar("FLAVOR");
     if(not defined($ismini)) {
         $this->logMsg("W", "FLAVOR not set?");
@@ -107,13 +106,13 @@ sub execute {
         );
         return $retval;
     }
-    my ($srv, $path);
-    my @rootfiles;
-    find(
-        sub { find_cb($this, '.*/root$', \@rootfiles) },
-        $this->handler()->collect()->basedir()
-    );
-
+    
+    my $dir = $this->collect()->basesubdirs()->{$cd};
+        $this->logMsg("I",
+            "BASE CD <$dir>"
+        );
+    
+    system("find $cd");
     return $retval;
 }
 
